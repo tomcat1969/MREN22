@@ -4,7 +4,7 @@ export default props => {
     return (
         <div>
             {props.products.map((product, idx)=>{
-                return <p key={idx}>{product.title}, {product.price},{product.description}</p>
+                return <p key={idx}><a href="/api/products/{product._id}">{product.title}</a></p>
             })}
         </div>
     )
