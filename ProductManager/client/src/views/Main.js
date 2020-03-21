@@ -1,12 +1,4 @@
-// import React, { useEffect, useState } from 'react';
-// import ProductForm from '../components/ProductForm'
-// export default () => {
-//     return (
-//         <div>
-//            <ProductForm/>
-//         </div>
-//     )
-// }
+
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import ProductForm from '../components/ProductForm';
@@ -21,11 +13,16 @@ export default () => {
                 setLoaded(true);
             });
     },[])
+
+    const removeFromDom = productId => {
+        setProducts(products.filter(product => product._id != productId));
+    }
+
     return (
         <div>
            <ProductForm/>
            <hr/><hr/>
-           {loaded && <ProductsList products={products}/>}
+           {loaded && <ProductsList products={products} removeFromDom={removeFromDom}/>}
         </div>
     )
 }
