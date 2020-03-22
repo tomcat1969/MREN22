@@ -1,17 +1,26 @@
-import React from 'react'
+
 import { Link } from '@reach/router';
 import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+
+import DeleteButton from './DeleteButton'
 
 export default props => {
-    const { removeFromDom } = props;
-    const deleteProduct = (productId) => {
-        axios.delete('http://localhost:8000/api/products/' + productId)
-            .then(res => {
-                removeFromDom(productId)
-            })
-    }
+   const [products,setProducts] = useState([])
+   useEffect(() => {
+       axios.get('http://localhost:8000/api/products')
+            .then(res => setProducts(res.data))
+   },[])
 
-
+   const removeFromDom = productId => {
+       console.log("id",productId)
+       console.log(products[0]._id)
+       console.log(productId == products[0]._id )
+       setProducts([3,3,3])
+       //setProducts(products.filter(product => product._id !== productId))
+       //setPeople(people.filter(person => person._id != personId))
+       console.log(products)
+   }
 
     return (
         <div>
@@ -22,9 +31,7 @@ export default props => {
                         {product.title}
                      </Link>
                      |
-                    <button onClick={(e)=>{deleteProduct(product._id)}}>
-                        Delete
-                    </button>
+                    <DeleteButton productId={product._id} successCallback={()=>removeFromDom(product._id)}/>
                 </p>
                 )
                 

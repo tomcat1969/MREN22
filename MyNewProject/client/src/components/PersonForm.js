@@ -35,8 +35,8 @@
 
 
 
-import React, { useEffect, useState } from 'react'
-import axios from 'axios';
+import React, { useState } from 'react'
+
 export default props => {
     const { initialFirstName, initialLastName, onSubmitProp } = props;
     const [firstName, setFirstName] = useState(initialFirstName);
